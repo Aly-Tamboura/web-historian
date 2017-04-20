@@ -12,7 +12,7 @@ var _ = require('underscore');
 exports.paths = {
   siteAssets: path.join(__dirname, '../web/public'),
   archivedSites: path.join(__dirname, '../archives/sites'),
-  list: path.join(__dirname, '../archives/sites.txt')
+  list: path.join(__dirname, '../archives/sites/sites.txt')
 };
 
 // Used for stubbing paths for tests, do not modify
@@ -26,12 +26,41 @@ exports.initialize = function(pathsObj) {
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(callback) {
+  fs.readFile(exports.paths.list, 'utf8', function(err, data) {
+    if (err) {
+      callback(null);
+    } else {
+      callback(data.split('\n'), null);
+    }
+  })
 };
 
 exports.isUrlInList = function(url, callback) {
+  fs.readFile(exports.paths.list, 'utf8', function(err, data) {
+    if (err) {
+      callback(null);
+    } else {
+      var list = data.split('\n')
+      if (list.indexOf(url) === - 1) {
+        callback(false, null)
+      } else {
+        callback(true, null);
+     }
+    } 
+  })
+
 };
 
 exports.addUrlToList = function(url, callback) {
+  fs.appendFile(exports.paths.list, url + '\n', function(err) {
+    if (err) {
+      console.log('Fail to write to List');
+      callback(null)
+    } else {
+      console.log('Write to List Success');
+      callback()
+    }
+  })
 };
 
 exports.isUrlArchived = function(url, callback) {
