@@ -74,6 +74,8 @@ exports.isUrlArchived = function(url, callback) {
     }
   });
 };
+
+//this is a hack using Sync system 
 exports.isArchived = function(url) {
   if (fs.existsSync(exports.paths.archivedSites + '/' + url)) {
     return true;
