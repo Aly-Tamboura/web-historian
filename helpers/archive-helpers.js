@@ -64,10 +64,8 @@ exports.addUrlToList = function(url, callback) {
 };
 
 exports.isUrlArchived = function(url, callback) {
-  fs.exists(exports.paths.archivedSites + url + '\n', (exists) => {
-    if (exists) {
-      callback(true);
-    }
+  fs.exists(exports.paths.archivedSites + '/' + url, (exists) => {
+      callback(exists);
   })
 };
 
