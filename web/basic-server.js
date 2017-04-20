@@ -1,6 +1,7 @@
 var http = require('http');
 var handler = require('./request-handler');
 var initialize = require('./initialize.js');
+fs = require('fs');
 
 // Why do you think we have this here?
 // HINT: It has to do with what's in .gitignore
@@ -17,3 +18,8 @@ if (module.parent) {
   console.log('Listening on http://' + ip + ':' + port);
 }
 
+fs.readFile('./public/index.html', function(err, html) {
+  if (err) {
+    throw err;
+  }
+});

@@ -12,8 +12,8 @@ var routes = {
 
     if (url === '/') {
       url = '/index.html';
-    } 
-    
+    }
+
     console.log('requst type ', req.method, 'reqest url ', req.url);
 
     fs.readFile(archive.paths.siteAssets + url, 'utf8', function(err, data) {
@@ -28,13 +28,13 @@ var routes = {
             res.write(data);
             res.end();
           }
-        })
+        });
       } else {
         res.writeHead(200, {'Content-Type': 'text/html'}); //headers come from helpers' file
         res.write(data);
         res.end();
       }
-    })
+    });
 
   },
   'POST': function(req, res) {
@@ -49,11 +49,11 @@ var routes = {
         if (err) {
           console.log('didn\'t write to file ', err);
         } else {
-          console.log('The file was written')
+          console.log('The file was written');
           res.writeHead(302, helpers.headers);
           res.end();
         }
-      })
+      });
       // res.writeHead(302, helpers.headers);
       // res.end();
     });
