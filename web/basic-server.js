@@ -17,9 +17,3 @@ if (module.parent) {
   server.listen(port, ip);
   console.log('Listening on http://' + ip + ':' + port);
 }
-
-fs.readFile('./public/index.html', function(err, html) {
-  if (err) {
-    throw err;
-  }
-});
