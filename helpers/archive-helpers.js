@@ -74,27 +74,30 @@ exports.downloadUrls = function(urls) {
   console.log('this is the passed it urls ', urls);
   urls.forEach(function(item){
     //console.log(item)
-    exports.isUrlArchived(item, function(data) {
+    exports.isUrlInList(item, function(data) {
       console.log('go through isArchived')
-      exports.isUrlInList(item, function() {
+      exports.isUrlArchived(item, function(data) {
         console.log('go through inURlist')
-        http.get('http://' + item, function(response) {
-        // Continuously update stream with data
-        var body = '';
-        response.on('data', function(d) {
-            //console.log('this is d', d);
-            body += d;
-        });
-          response.on('end', function() {
-              // Data reception is done, do whatever with it!
-              //console.log('this is the body ', body)
-            fs.writeFile(exports.paths.archivedSites + '/' + item, body, function() {
+        request.get('http://alytamboura.com', function(err, data){
+          if(err) {
+            console.log(err)
+          } else {
+            fs.appendFile(exports.paths.archivedSites + '/' + item, data.body, function() {
               console.log('url downloaded');
             });
-          });
-        });
+          }
+        })
       });
     });
   });
 };
+
+// request.get('http://alytamboura.com', function(err, data){
+//   if(err) {
+//     console.log(err)
+//   } else {
+//     console.log('from requst --------------------', data.body)
+//   }
+  
+// })
 
