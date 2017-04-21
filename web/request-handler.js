@@ -14,7 +14,7 @@ var routes = {
       url = '/index.html';
     }
 
-    console.log('requst type ', req.method, 'reqest url ', req.url);
+    //console.log('requst type ', req.method, 'reqest url ', req.url);
 
     fs.readFile(archive.paths.siteAssets + url, 'utf8', function(err, data) {
       if (err) {
@@ -50,12 +50,14 @@ var routes = {
           console.log('didn\'t write to file ', err);
         } else {
           console.log('The file was written');
-          res.writeHead(302, helpers.headers);
-          res.end();
+          helpers.serveAssets(res, '/index.html', function(err, data) {
+            console.log('this is out file' , data)  
+            // res.write(data);
+            res.writeHead(302, {'Content-Type': 'text/html'});
+            res.end(data);
+          });
         }
       });
-      // res.writeHead(302, helpers.headers);
-      // res.end();
     });
   },
   'OPTIONS': function(req, res) {
@@ -67,6 +69,4 @@ exports.handleRequest = function (req, res) {
   if (routes[req.method]) {
     routes[req.method](req, res);
   }
-  //res.end(archive.paths.list);
-
 };

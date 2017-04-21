@@ -78,7 +78,7 @@ exports.downloadUrls = function(urls) {
       console.log('go through isArchived')
       exports.isUrlArchived(item, function(data) {
         console.log('go through inURlist')
-        request.get('http://alytamboura.com', function(err, data){
+        request.get('http://' + item, function(err, data){
           if(err) {
             console.log(err)
           } else {
@@ -92,12 +92,4 @@ exports.downloadUrls = function(urls) {
   });
 };
 
-// request.get('http://alytamboura.com', function(err, data){
-//   if(err) {
-//     console.log(err)
-//   } else {
-//     console.log('from requst --------------------', data.body)
-//   }
-  
-// })
 

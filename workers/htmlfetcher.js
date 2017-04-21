@@ -12,4 +12,8 @@ exports.fetcher = function() {
   })
 
 };
-exports.fetcher()
+
+//ghetto cron 
+setInterval(function() {
+  exports.fetcher()
+}, 7000000);
