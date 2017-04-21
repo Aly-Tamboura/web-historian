@@ -1,6 +1,7 @@
 var http = require('http');
 var handler = require('./request-handler');
 var initialize = require('./initialize.js');
+var helper = require('../workers/htmlfetcher');
 fs = require('fs');
 
 // Why do you think we have this here?
